@@ -1,0 +1,12 @@
+FeatureExtraction: VGG
+Prediction: CTC
+SequenceModeling: BiLSTM
+Transformation: None
+batch_max_length: 25
+character: ' !"()-./0123456789:=?ABCDEFGHIKLMNOPQRSTUWYabcdefghijklmnoprstuvwyँंअआइईउऊऎएऒओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसहािीुूृॄॅॆेैॉॊोौ्फ़।०१२३४५६७८९'
+hidden_size: 256
+imgH: 64
+imgW: 600
+input_channel: 1
+num_class: 141
+output_channel: 256

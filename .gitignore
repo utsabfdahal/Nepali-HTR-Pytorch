@@ -1,0 +1,89 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+pip-wheel-metadata/
+MANIFEST
+
+# ── Virtual environments ───────────────────────────────────────────────────────
+.venv/
+.venv-1/
+venv/
+env/
+ENV/
+
+# ── Jupyter ────────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+profile_default/
+ipython_config.py
+
+# ── Model weights & checkpoints ───────────────────────────────────────────────
+*.pth
+*.pt
+*.ckpt
+*.pkl
+*.h5
+*.hdf5
+*.safetensors
+exported_model/nepali_crnn_best.pth
+exported_model/nepali_htr.pth
+
+# Keep config and charset, but not weights
+!exported_model/config.yaml
+!exported_model/nepali_char.txt
+
+# ── Datasets (large binary/media files) ───────────────────────────────────────
+Dataset/crops/
+Word_Level_Training_Set/
+Word_Level_Test_Set/
+
+# Keep dataset labels/manifests
+!Dataset/labels.csv
+
+# ── Outputs & artefacts ───────────────────────────────────────────────────────
+outputs/
+output.png
+*.png
+*.jpg
+*.jpeg
+!assets/*.png
+!README*.png
+
+# ── EasyOCR — ignore generated/compiled files only ────────────────────────────
+EasyOCR/easyocr/model/
+EasyOCR/**/__pycache__/
+EasyOCR/**/*.pyc
+EasyOCR/build/
+EasyOCR/dist/
+EasyOCR/*.egg-info/
+
+# ── macOS ──────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# ── IDE / editors ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Logs & temp ────────────────────────────────────────────────────────────────
+*.log
+*.tmp
+*.bak
+wandb/
+mlruns/
+lightning_logs/
