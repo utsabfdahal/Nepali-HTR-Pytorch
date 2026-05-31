@@ -56,9 +56,8 @@ output.png
 !assets/*.png
 !README*.png
 
-# ── YoloFinetuned (separate repo) ──────────────────────────────────────────────
-YoloFinetuned/
-
+# ── YoloFinetuned — ignore model weights only ─────────────────────────────────
+YoloFinetuned/nepali_hrt_yolo11n/weights/!YoloFinetuned/nepali_hrt_yolo11n/*.png
 # ── EasyOCR — ignore generated/compiled files only ────────────────────────────
 EasyOCR/easyocr/model/
 EasyOCR/**/__pycache__/
