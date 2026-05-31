@@ -56,6 +56,9 @@ output.png
 !assets/*.png
 !README*.png
 
+# ── YoloFinetuned (separate repo) ──────────────────────────────────────────────
+YoloFinetuned/
+
 # ── EasyOCR — ignore generated/compiled files only ────────────────────────────
 EasyOCR/easyocr/model/
 EasyOCR/**/__pycache__/
