@@ -100,7 +100,15 @@ These are YOLO-cropped word images from a completely different source — differ
 
 ![Evaluation Metrics](assets/eval_metrics.png)
 
-The CER of 33% is actually decent for a model that's never seen these handwriting styles — it gets most of the characters right even when the full word doesn't match exactly.
+#### Why the large performance gap?
+
+The 96% → 26% accuracy drop comes down to two main factors:
+
+1. **Training data is Indian Devanagari, evaluation data is Nepali handwriting.** The training set (`Word_Level_Training_Set`) consists of Indian handwriting samples. While both use the Devanagari script, Nepali handwriting has different stylistic patterns — different stroke habits, letter forms, and conjunct preferences. The model learned Indian writing conventions well (hence 96% on the held-out validation split from the same source), but those patterns don't transfer cleanly to Nepali handwriting.
+
+2. **Poor image quality in the evaluation set.** As visible in the worst predictions below, many of the `Dataset/crops` images are heavily degraded — blurry, low contrast, noisy, and sometimes containing multiple words or partial words in a single crop. The model was never exposed to this level of degradation during training, so it hallucinates entirely wrong character sequences (CER values exceeding 100% in the worst cases, meaning the predictions are longer and completely different from the ground truth).
+
+The CER of 33% is still somewhat encouraging — even across this domain gap, the model gets roughly two-thirds of characters right on average. But the word-level accuracy suffers because even a single wrong character means the whole word is counted as incorrect.
 
 ### Best & Worst Predictions
 
@@ -108,7 +116,7 @@ Here are samples where the model did well (perfect character match):
 
 ![Best Predictions](assets/best_predictions.png)
 
-And the hardest cases — mostly images where the handwriting is very difficult or the crop captured more than one word:
+And the hardest cases — these illustrate both problems: the handwriting style is distinctly Nepali (not what the model was trained on), and the image quality is poor with blurry strokes, low contrast, and noisy crops that sometimes capture more than one word:
 
 ![Worst Predictions](assets/worst_predictions.png)
 
