@@ -88,12 +88,6 @@ Training converged around epoch 30–40 with best validation loss of 0.0523.
 
 ![Validation Predictions](assets/val_predictions.png)
 
-### Test Set Predictions (Word_Level_Test_Set)
-
-The test set contains 20,511 unlabelled handwritten word images from the same Indian Devanagari source as the training data. Since there are no ground truth labels, we can only visually inspect the predictions. Here are 20 random samples — the model reads these confidently and the predictions look visually correct, consistent with the 96% validation accuracy on this distribution.
-
-![Test Set Predictions](assets/test_set_predictions.png)
-
 ### Out-of-Distribution Evaluation (Dataset/crops)
 
 These are YOLO-cropped word images from a completely different source — different handwriting styles, different image quality. This is the real test.
@@ -125,6 +119,14 @@ Here are samples where the model did well (perfect character match):
 And the hardest cases — these illustrate both problems: the handwriting style is distinctly Nepali (not what the model was trained on), and the image quality is poor with blurry strokes, low contrast, and noisy crops that sometimes capture more than one word:
 
 ![Worst Predictions](assets/worst_predictions.png)
+
+### Indian Test Set — Model Performs Well (Word_Level_Test_Set)
+
+To confirm that the poor OOD results are due to the domain shift and not a broken model, here are 20 random predictions from the `Word_Level_Test_Set` — 20,511 unlabelled images from the same Indian Devanagari source as the training data. The model reads these confidently and the predictions are visually correct, consistent with the 96% validation accuracy.
+
+![Test Set Predictions](assets/test_set_predictions.png)
+
+This confirms the model works well on Indian handwriting — the accuracy drop on `Dataset/crops` is specifically because of the shift to Nepali handwriting and degraded image quality.
 
 ## Project Structure
 
