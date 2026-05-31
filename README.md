@@ -88,6 +88,12 @@ Training converged around epoch 30–40 with best validation loss of 0.0523.
 
 ![Validation Predictions](assets/val_predictions.png)
 
+### Test Set Predictions (Word_Level_Test_Set)
+
+The test set contains 20,511 unlabelled handwritten word images from the same Indian Devanagari source as the training data. Since there are no ground truth labels, we can only visually inspect the predictions. Here are 20 random samples — the model reads these confidently and the predictions look visually correct, consistent with the 96% validation accuracy on this distribution.
+
+![Test Set Predictions](assets/test_set_predictions.png)
+
 ### Out-of-Distribution Evaluation (Dataset/crops)
 
 These are YOLO-cropped word images from a completely different source — different handwriting styles, different image quality. This is the real test.
