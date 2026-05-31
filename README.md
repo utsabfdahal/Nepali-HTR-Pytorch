@@ -6,10 +6,43 @@ A CRNN-based pipeline for recognizing handwritten Nepali (Devanagari) text at th
 
 ## What this does
 
-Takes a cropped image of a handwritten Nepali word and predicts the text. The full pipeline:
+Takes a cropped image of a handwritten Nepali word and predicts the text. This is the **second stage** of a two-stage pipeline:
 
-1. **YOLO** crops individual words from document pages (done separately)
-2. **This model** reads each cropped word image → outputs Devanagari text
+1. **[YOLOv11 Word Detection](https://github.com/utsabfdahal/YoloFinetuned)** — detects and crops individual words from full document/page images
+2. **This model (CRNN)** — reads each cropped word image → outputs Devanagari text
+
+## Methodology
+
+The full HTR system works as a two-stage pipeline:
+
+### Stage 1: Word Detection with YOLOv11 → [`YoloFinetuned`](https://github.com/utsabfdahal/YoloFinetuned)
+
+Before we can recognize handwritten text, we need to locate individual words in a document image. I fine-tuned a **YOLOv11** object detection model to detect word-level bounding boxes in scanned pages of Nepali handwriting. The YOLO model outputs crop coordinates for each detected word, which are then extracted as individual images.
+
+This is the first step — the cropped word images produced by YOLO become the input to the recognition model in this repository.
+
+### Stage 2: Word Recognition with CRNN → This Repository
+
+Each cropped word image is fed into the **CRNN** (Convolutional Recurrent Neural Network) model defined here. The model extracts visual features using a VGG-style CNN, models the character sequence with a bidirectional LSTM, and decodes the output using CTC (Connectionist Temporal Classification). The result is the predicted Nepali text for each word.
+
+```
+┌─────────────────┐     ┌──────────────────┐     ┌──────────────────┐
+│  Document Page   │ ──► │  YOLOv11 (Stage 1)│ ──► │  Cropped Words   │
+│  (full scan)     │     │  Word Detection   │     │  (individual)    │
+└─────────────────┘     └──────────────────┘     └────────┬─────────┘
+                                                          │
+                                                          ▼
+                                                 ┌──────────────────┐
+                                                 │  CRNN (Stage 2)  │
+                                                 │  Text Recognition│
+                                                 └────────┬─────────┘
+                                                          │
+                                                          ▼
+                                                 ┌──────────────────┐
+                                                 │  Predicted Text  │
+                                                 │  (Devanagari)    │
+                                                 └──────────────────┘
+```
 
 ## Architecture
 
